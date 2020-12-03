@@ -83,6 +83,16 @@ function! s:select_i()
         let end_line = search_end - 1
     end
 
+    let start_line = nextnonblank(start_line)
+    if start_line == 0 || getline(start_line) =~ s:pattern
+        return 0
+    end
+
+    let end_line = prevnonblank(end_line)
+    if end_line == 0 || getline(end_line) =~ s:pattern
+        return 0
+    end
+
     let curr_pos = getpos('.')
     let start_pos = [curr_pos[0], start_line, 1, curr_pos[3]]
     let end_pos = [curr_pos[0], end_line, 0, curr_pos[3]]
