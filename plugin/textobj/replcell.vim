@@ -21,9 +21,9 @@ call textobj#user#plugin('replcell', {
 function! s:move_n()
     let search_line = search(s:pattern, s:flags)
     if search_line == 0
-        let target_line = line('$')
+        return 0
     else
-        let target_line = search_line + 1
+        let target_line = search_line
     end
 
     let curr_pos = getpos('.')
@@ -32,11 +32,11 @@ function! s:move_n()
 endfunction
 
 function! s:move_p()
-    let search_line = search(s:pattern, s:flags . 'b')
+    let search_line = search(s:pattern, s:flags_no_c . 'b')
     if search_line == 0
         let target_line = 1
     else
-        let target_line = search_line - 1
+        let target_line = search_line
     end
 
     let curr_pos = getpos('.')
@@ -45,7 +45,7 @@ function! s:move_p()
 endfunction
 
 function! s:select_a()
-    let search_start = search(s:pattern, s:flags_no_c . 'b')
+    let search_start = search(s:pattern, s:flags . 'b')
     let search_end = search(s:pattern, s:flags_no_c)
 
     if search_start == 0
