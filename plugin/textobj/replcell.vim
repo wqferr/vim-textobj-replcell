@@ -6,8 +6,7 @@ end
 " https://github.com/GCBallesteros/vim-textobj-hydrogen
 
 let s:pattern = '^\s*\S*\s*%%'
-let s:flags_no_c = 'nW'
-let s:flags = s:flags_no_c . 'c'
+let s:flags = 'nW'
 
 call textobj#user#plugin('replcell', {
             \ '-': {
@@ -32,7 +31,7 @@ function! s:move_n()
 endfunction
 
 function! s:move_p()
-    let search_line = search(s:pattern, s:flags_no_c . 'b')
+    let search_line = search(s:pattern, s:flags . 'b')
     if search_line == 0
         let target_line = 1
     else
@@ -46,7 +45,7 @@ endfunction
 
 function! s:select_a()
     let search_start = search(s:pattern, s:flags . 'b')
-    let search_end = search(s:pattern, s:flags_no_c)
+    let search_end = search(s:pattern, s:flags)
 
     if search_start == 0
         let start_line = 1
@@ -68,8 +67,8 @@ function! s:select_a()
 endfunction
 
 function! s:select_i()
-    let search_start = search(s:pattern, s:flags_no_c . 'b')
-    let search_end = search(s:pattern, s:flags_no_c)
+    let search_start = search(s:pattern, s:flags . 'b')
+    let search_end = search(s:pattern, s:flags)
 
     if search_start == 0
         let start_line = 1
